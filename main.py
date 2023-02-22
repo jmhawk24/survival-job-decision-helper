@@ -28,7 +28,6 @@ def get_intersects(surv_wage, real_wage, months_offset):
     return line_intersects
 
 
-
 def main():
     running = True
 
@@ -37,18 +36,22 @@ def main():
         print('''Welcome to the survival job decision helper.
         I'll ask you for some salary inputs, and then tell you whether you should get a survival job.''')
         expected_survival_wage = int(input('For the "survival job," how much would you expect to be paid PER HOUR?\n'))
-        expected_real_wage = int(input('Now, not counting benefits, how much would you expect to be paid for the "real" job?\n'))
+        expected_real_wage = int(
+            input('Now, not counting benefits, how much would you expect to be paid for the "real" job?\n'))
 
-        expected_time_to_find_real_job_while_working = int(input('How long do you think it will take you to find a real job?'))
-        expected_time_to_find_real_job_unemployed = int(input('Now, how long do you expect it would take to you find a real job if you weren\'t working?'))
+        expected_time_to_find_real_job_while_working = int(
+            input('How long do you think it will take you to find a real job?'))
+        expected_time_to_find_real_job_unemployed = int(
+            input('Now, how long do you expect it would take to you find a real job if you weren\'t working?'))
 
-        intersects = get_intersects(expected_survival_wage, expected_real_wage, expected_time_to_find_real_job_while_working)
+        intersects = get_intersects(expected_survival_wage, expected_real_wage,
+                                    expected_time_to_find_real_job_while_working)
         print('''If it takes you + {expected_time} to find a "real" job, 
         then your real job wages will pass the survival job wages {intersect_months_from_start} months after starting your real job, 
         or {intersect_months_from_now} months from now.'''
-              .format(expected_time = expected_time_to_find_real_job,
-                      intersect_months_from_start = intersects[0] - expected_time_to_find_real_job,
-                      intersect_months_from_now = intersects[0]))
+              .format(expected_time=expected_time_to_find_real_job_while_working,
+                      intersect_months_from_start=intersects[0] - expected_time_to_find_real_job_while_working,
+                      intersect_months_from_now=intersects[0]))
         print('Remember that this calculation does not count benefits! It assumes 40 hrs / week.')
         keep_going = input('Keep going? Type `y` to continue.')
         if not (keep_going == "y"):
